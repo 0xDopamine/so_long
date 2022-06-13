@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 15:31:32 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/01/06 19:09:55 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/10 17:44:34 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,18 +99,3 @@ char	*get_next_line(int fd)
 	str = magic(str, fd);
 	return (str);
 }
-
-// int main(int argc, char **argv)
-// {
-// 	int file;
-// 	int i = 1;
-
-// 	file = open("41_with_nl", O_RDONLY);
-// 	while (i < 15)
-// 	{
-// 	 	printf("%d: %s\n", i, get_next_line(file));
-// 		i++;
-// 	}
-// 	system("leaks a.out");
-// 	return (0);
-//  }

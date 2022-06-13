@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 06:04:24 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/07 06:04:24 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/11 18:35:14 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,6 @@ int	get_y(char **map)
 
 int main()
 {
-	int		i;
 	int		file;
 	char	*arr;
 	char	*buff;
@@ -178,7 +177,7 @@ int main()
 	y = get_y(map) - 1;
 	if (check_borders_sides(map, x) && check_borders_top(map, y)
 		&& check_collectibles(map) && check_exit(map) && check_player(map))
-		printf("map is valid\n");
+		draw(map, x, y);
 	else
 		printf("invalid map\n");
 

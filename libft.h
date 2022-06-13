@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:43:32 by mbaioumy          #+#    #+#             */
-/*   Updated: 2021/11/27 15:31:32 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/13 00:56:41 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_data
+{
+	void	*mlx;
+	void	*img;
+	void	*addr;
+	void	*win;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}		t_data;
+
 char			*ft_strdup(char *src);
 int				checknl(char *str);
 char			*get_next_line(int fd);
@@ -40,5 +51,6 @@ int				ft_strncmp(char *s1, char *s2, unsigned int n);
 char			*ft_substr(char *s, unsigned int start, size_t len);
 char			*ft_strjoin(char *s1, char *s2);
 char			**ft_split(char const *s, char c);
+void			draw(char **map, int x, int y);
 
 #endif
