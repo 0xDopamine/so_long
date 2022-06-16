@@ -6,70 +6,61 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:49:43 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/13 01:03:31 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/16 19:01:51 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <mlx.h>
 
-void	img_to_window (t_data data, char *path)
+void	img_to_window (t_data *data, char *path)
 {
 	int	img_height;
 	int	img_width;
-	data.img = mlx_xpm_file_to_image(data.mlx, path, &img_width, &img_height); 		
-	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
-	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.line_length, &data.endian);
-	mlx_loop(data.mlx);
+	data->img = mlx_xpm_file_to_image(data->mlx, path, &img_width, &img_height); 		
+	mlx_put_image_to_window(data->mlx, data->win, data->img, data->y, data->x);
 }
 
-void	draw(char **map, int x, int y)
+void	draw(char **map, int x, int y, t_data *data)
 {
-	t_data	data;
-	char	*road_path = "/Users/mbaioumy/Documents/so_long/Assets/road.xpm";
+	//char	*road_path = "/Users/mbaioumy/Documents/so_long/Assets/road.xpm";
 	char	*border_path = "/Users/mbaioumy/Documents/so_long/Assets/border.xpm";
 	char	*player_path = "/Users/mbaioumy/Documents/so_long/Assets/homer.xpm";
+	char	*collectible_path = "/Users/mbaioumy/Documents/so_long/Assets/donut.xpm";
+	char	*exit_path = "/Users/mbaioumy/Documents/so_long/Assets/moesbar_108047.xpm";
 	int		i, j;
+	// int	img_height;
+	// int	img_width;
 
 	i = 0;
-	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, x * 70, y * 70, "test");
-	while (map[i])
+	x++;
+	data->x = 0;
+	while (map[i + 1])
 	{
 		j = 0;
+		data->y = 0;
 		while (map[i][j])
 		{
 			if (map[i][j] == '1')
-			{
-				img_to_window(data, player_path);
-				// data.img = mlx_xpm_file_to_image(mlx, border_path, &img_width, &img_height); 		
-				// mlx_put_image_to_window(mlx, data.win, data.img, 0, 0);
-				// printf("printed border %d\n", j);
-			}
-			else if (map[i][j] == '0')
-			{
-				img_to_window(data, road_path);
-				// img.img = mlx_xpm_file_to_image(mlx, road_path, &img_width, &img_height); 		
-				// mlx_put_image_to_window(mlx, data.win, data.img, 0, 0);
-				// printf("printed road\n %d", j);
-			}
-			else if (map[i][j] == 'P')
-			{
-				img_to_window(data, player_path);
-				// img.img = mlx_xpm_file_to_image(mlx, player_path, &img_width, &img_height); 		
-				// mlx_put_image_to_window(mlx, data.win, data.img, 0, 0);
-				// printf("printed homer %d", j);
-			}
-			else
-			{
 				img_to_window(data, border_path);
-				// img.img = mlx_xpm_file_to_image(mlx, road_path, &img_width, &img_height); 		
-				// mlx_put_image_to_window(mlx, win, img.img, 0, 0);
-				// printf("printed else");
-			}
+			// else if (map[i][j] == '0')
+			// {
+			// 	img_to_window(data, road_path);
+			// 	// img.img = mlx_xpm_file_to_image(mlx, road_path, &img_width, &img_height); 		
+			// 	// mlx_put_image_to_window(mlx, data.win, data.img, 0, 0);
+			// 	// printf("printed road\n %d", j);
+			// }
+			else if (map[i][j] == 'P')
+				img_to_window(data, player_path);
+			else if (map[i][j] == 'C')
+				img_to_window(data, collectible_path);
+			else if (map[i][j] == 'E')
+				img_to_window(data, exit_path);
 			j++;
+			data->y += 70;
 		}
+		data->x += 70;
 		i++;
 	}
-	mlx_loop(data.mlx);
+	
 }

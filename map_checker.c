@@ -6,12 +6,13 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 06:04:24 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/11 18:35:14 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/16 19:15:59 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
+#include <mlx.h>
 #include "libft.h"
 
 int	check_player(char **map)
@@ -161,8 +162,10 @@ int main()
 	char	**map;
 	int		x;
 	int		y;
+	t_data	*data;
 
 	y = 0;
+	data = malloc(sizeof(t_data));
 	buff = ft_strdup("");
 	arr = ft_strdup("");
 	while (y < 6)
@@ -175,11 +178,14 @@ int main()
 	map = ft_split(arr, '\n');
 	x = get_x(map) - 1;
 	y = get_y(map) - 1;
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, x * 70, y * 70, "test");
 	if (check_borders_sides(map, x) && check_borders_top(map, y)
 		&& check_collectibles(map) && check_exit(map) && check_player(map))
-		draw(map, x, y);
+		draw(map, x, y, data);
 	else
 		printf("invalid map\n");
-
+	mlx_mouse_hook(data->win, key_hook, (void *)data);
+	mlx_loop(data->mlx);
 	return 0;
 }

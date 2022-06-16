@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:43:32 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/13 00:56:41 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/16 19:16:37 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		x;
+	int		y;
 }		t_data;
 
 char			*ft_strdup(char *src);
@@ -51,6 +53,7 @@ int				ft_strncmp(char *s1, char *s2, unsigned int n);
 char			*ft_substr(char *s, unsigned int start, size_t len);
 char			*ft_strjoin(char *s1, char *s2);
 char			**ft_split(char const *s, char c);
-void			draw(char **map, int x, int y);
+void			draw(char **map, int x, int y, t_data *data);
+int				key_hook(int key, int x, int y, void *ptr);
 
 #endif
