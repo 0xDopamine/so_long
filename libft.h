@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:43:32 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/16 19:16:37 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/16 21:11:55 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_data
 	void	*img;
 	void	*addr;
 	void	*win;
+	char	**map;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -54,6 +55,9 @@ char			*ft_substr(char *s, unsigned int start, size_t len);
 char			*ft_strjoin(char *s1, char *s2);
 char			**ft_split(char const *s, char c);
 void			draw(char **map, int x, int y, t_data *data);
-int				key_hook(int key, int x, int y, void *ptr);
-
+int				key_hook(int key, void *ptr);
+char			**move_up(t_data *data);
+char			**move_down(t_data *data);
+char			**move_right(t_data *data);
+char			**move_left(t_data *data);
 #endif

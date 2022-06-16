@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:49:43 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/16 19:01:51 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/16 23:56:16 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	draw(char **map, int x, int y, t_data *data)
 	// int	img_width;
 
 	i = 0;
-	x++;
+	y++;
 	data->x = 0;
-	while (map[i + 1])
+	while (map[i])
 	{
 		j = 0;
 		data->y = 0;

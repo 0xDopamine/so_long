@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 06:04:24 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/16 19:15:59 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/17 00:10:57 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	check_borders_sides(char **map, int x)
 	int	i;
 
 	i = 0;
+	x -= 1;
 	while (map[i])
 	{
 		if (map[i][0] != '1')
@@ -111,6 +112,7 @@ int	check_borders_top(char **map, int y)
 	int	i;
 
 	i = 0;
+	y -= 1;
 	while (map[0][i])
 	{
 		if (map[0][i] != '1')
@@ -154,7 +156,24 @@ int	get_y(char **map)
 	return (y);
 }
 
-int main()
+void	print_map(char **map)
+{
+	int	i;
+	
+	i = 0;
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
+}
+
+void	check_ber(char *argv)
+{
+	
+}
+
+int main(int argc, char **argv)
 {
 	int		file;
 	char	*arr;
@@ -168,24 +187,32 @@ int main()
 	data = malloc(sizeof(t_data));
 	buff = ft_strdup("");
 	arr = ft_strdup("");
-	while (y < 6)
+	check_ber(argv[1]);
+	file = open(argv[1], O_RDONLY);
+	buff = get_next_line(file);
+	while (buff)
 	{
-		file = open("map.ber", O_RDONLY);
-		buff = get_next_line(file);
 		arr = ft_strjoin(arr, buff);
-		y++;
+		buff = get_next_line(file);
 	}
-	map = ft_split(arr, '\n');
-	x = get_x(map) - 1;
-	y = get_y(map) - 1;
+	data->map = ft_split(arr, '\n');
+	//print_map(data->map);
+	x = get_x(data->map);
+	y = get_y(data->map);
+	//printf("x: %d\ny: %d\n", x, y);
+	// printf("border sides: %d\n", check_borders_sides(data->map, x));
+	// printf("borders top: %d\n", check_borders_top(data->map, y));
+	// printf("collectibles: %d\n", check_collectibles(data->map));
+	// printf("exit: %d\n", check_exit(data->map));
+	// printf("player: %d\n", check_player(data->map));
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, x * 70, y * 70, "test");
-	if (check_borders_sides(map, x) && check_borders_top(map, y)
-		&& check_collectibles(map) && check_exit(map) && check_player(map))
-		draw(map, x, y, data);
+	if (check_borders_sides(data->map, x) && check_borders_top(data->map, y)
+		&& check_collectibles(data->map) && check_exit(data->map) && check_player(data->map))
+		draw(data->map, x, y, data);
 	else
 		printf("invalid map\n");
-	mlx_mouse_hook(data->win, key_hook, (void *)data);
+	mlx_key_hook(data->win, key_hook, data);
 	mlx_loop(data->mlx);
 	return 0;
 }
