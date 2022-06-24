@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 06:04:24 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/17 00:10:57 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/24 21:14:16 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,17 @@ void	print_map(char **map)
 
 void	check_ber(char *argv)
 {
-	
+	int	i;
+
+	i = 0;
+	while (argv[i] != '.')
+		i++;
+	//printf("%d", ft_strncmp(".ber", argv + i, ft_strlen(argv + i)));
+	if (ft_strncmp(".ber", argv + i, ft_strlen(argv + i)) == 0)
+		return ;
+	else
+		printf("map file invalid\n");
+	exit(1);
 }
 
 int main(int argc, char **argv)
@@ -196,10 +206,9 @@ int main(int argc, char **argv)
 		buff = get_next_line(file);
 	}
 	data->map = ft_split(arr, '\n');
-	//print_map(data->map);
 	x = get_x(data->map);
 	y = get_y(data->map);
-	//printf("x: %d\ny: %d\n", x, y);
+	// printf("x: %d\ny: %d\n", x, y);
 	// printf("border sides: %d\n", check_borders_sides(data->map, x));
 	// printf("borders top: %d\n", check_borders_top(data->map, y));
 	// printf("collectibles: %d\n", check_collectibles(data->map));
@@ -211,8 +220,11 @@ int main(int argc, char **argv)
 		&& check_collectibles(data->map) && check_exit(data->map) && check_player(data->map))
 		draw(data->map, x, y, data);
 	else
+	{
 		printf("invalid map\n");
+		return 0;
+	}
 	mlx_key_hook(data->win, key_hook, data);
 	mlx_loop(data->mlx);
-	return 0;
+	return (0);
 }

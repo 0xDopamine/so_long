@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:49:43 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/16 23:56:16 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/24 21:11:26 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	draw(char **map, int x, int y, t_data *data)
 	char	*player_path = "/Users/mbaioumy/Documents/so_long/Assets/homer.xpm";
 	char	*collectible_path = "/Users/mbaioumy/Documents/so_long/Assets/donut.xpm";
 	char	*exit_path = "/Users/mbaioumy/Documents/so_long/Assets/moesbar_108047.xpm";
-	int		i, j;
-	// int	img_height;
-	// int	img_width;
+	char	*enemy_path = "/Users/mbaioumy/Documents/so_long/Assets/MrBurns.xpm";
+	int		i;
+	int		j;
 
 	i = 0;
 	y++;
@@ -56,11 +56,12 @@ void	draw(char **map, int x, int y, t_data *data)
 				img_to_window(data, collectible_path);
 			else if (map[i][j] == 'E')
 				img_to_window(data, exit_path);
+			else if (map[i][j] == 'B')
+				img_to_window(data, enemy_path);
 			j++;
 			data->y += 70;
 		}
 		data->x += 70;
 		i++;
 	}
-	
 }
