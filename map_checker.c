@@ -6,13 +6,10 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 06:04:24 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/24 21:14:16 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/26 19:03:20 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <mlx.h>
 #include "libft.h"
 
 int	check_player(char **map)
@@ -225,6 +222,7 @@ int main(int argc, char **argv)
 		return 0;
 	}
 	mlx_key_hook(data->win, key_hook, data);
+	mlx_loop_hook(data->mlx, animation, data);
 	mlx_loop(data->mlx);
 	return (0);
 }

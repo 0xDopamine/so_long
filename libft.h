@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:43:32 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/16 21:11:55 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/26 21:16:55 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <mlx.h>
 
 typedef struct s_list
 {
@@ -60,4 +61,11 @@ char			**move_up(t_data *data);
 char			**move_down(t_data *data);
 char			**move_right(t_data *data);
 char			**move_left(t_data *data);
+void			img_to_window (t_data *data, char *path);
+int				animation(t_data *data);
+void			rotate_donut(t_data *data, char *path);
+char			**move_up_enemy(t_data *data);
+char			**move_down_enemy(t_data *data);
+char			**move_right_enemy(t_data *data);
+char			**move_left_enemy(t_data *data);
 #endif

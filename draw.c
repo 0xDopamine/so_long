@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:49:43 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/24 21:11:26 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/26 20:48:13 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	draw(char **map, int x, int y, t_data *data)
 			// }
 			else if (map[i][j] == 'P')
 				img_to_window(data, player_path);
-			else if (map[i][j] == 'C')
-				img_to_window(data, collectible_path);
+			// else if (map[i][j] == 'C')
+			// 	img_to_window(data, collectible_path);
 			else if (map[i][j] == 'E')
 				img_to_window(data, exit_path);
 			else if (map[i][j] == 'B')
