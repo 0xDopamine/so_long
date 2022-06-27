@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:49:43 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/26 20:48:13 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/28 00:11:16 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,17 @@ void	img_to_window (t_data *data, char *path)
 	mlx_put_image_to_window(data->mlx, data->win, data->img, data->y, data->x);
 }
 
-void	draw(char **map, int x, int y, t_data *data)
+void	draw(char **map, t_data *data, t_str *paths)
 {
-	//char	*road_path = "/Users/mbaioumy/Documents/so_long/Assets/road.xpm";
-	char	*border_path = "/Users/mbaioumy/Documents/so_long/Assets/border.xpm";
-	char	*player_path = "/Users/mbaioumy/Documents/so_long/Assets/homer.xpm";
-	char	*collectible_path = "/Users/mbaioumy/Documents/so_long/Assets/donut.xpm";
-	char	*exit_path = "/Users/mbaioumy/Documents/so_long/Assets/moesbar_108047.xpm";
-	char	*enemy_path = "/Users/mbaioumy/Documents/so_long/Assets/MrBurns.xpm";
+	paths->border = "/Users/mbaioumy/Documents/so_long/Assets/border.xpm";
+	paths->player = "/Users/mbaioumy/Documents/so_long/Assets/homer.xpm";
+	paths->collectible = "/Users/mbaioumy/Documents/so_long/Assets/donut.xpm";
+	paths->exit = "/Users/mbaioumy/Documents/so_long/Assets/moesbar_108047.xpm";
+	paths->enemy = "/Users/mbaioumy/Documents/so_long/Assets/MrBurns.xpm";
 	int		i;
 	int		j;
 
 	i = 0;
-	y++;
 	data->x = 0;
 	while (map[i])
 	{
@@ -42,22 +40,15 @@ void	draw(char **map, int x, int y, t_data *data)
 		while (map[i][j])
 		{
 			if (map[i][j] == '1')
-				img_to_window(data, border_path);
-			// else if (map[i][j] == '0')
-			// {
-			// 	img_to_window(data, road_path);
-			// 	// img.img = mlx_xpm_file_to_image(mlx, road_path, &img_width, &img_height); 		
-			// 	// mlx_put_image_to_window(mlx, data.win, data.img, 0, 0);
-			// 	// printf("printed road\n %d", j);
-			// }
+				img_to_window(data, paths->border);
 			else if (map[i][j] == 'P')
-				img_to_window(data, player_path);
-			// else if (map[i][j] == 'C')
-			// 	img_to_window(data, collectible_path);
+				img_to_window(data, paths->player);
+			else if (map[i][j] == 'C')
+				img_to_window(data, paths->collectible);
 			else if (map[i][j] == 'E')
-				img_to_window(data, exit_path);
+				img_to_window(data, paths->exit);
 			else if (map[i][j] == 'B')
-				img_to_window(data, enemy_path);
+				img_to_window(data, paths->enemy);
 			j++;
 			data->y += 70;
 		}

@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:42:53 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/27 01:16:43 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/27 21:59:14 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,31 @@ void	enemy_moves(t_data *data, t_str *paths)
 	int		file;
 	char	rand;
 	
-	file = open("/dev/random", O_RDONLY); 
+	file = open("/dev/random", O_RDONLY);
+	paths->enemy = "Assets/MrBurns.xpm";
 	read(file, &rand, 1);
 	if ((rand >= -128) && (rand <= -64))
 	{
 		mlx_clear_window(data->mlx, data->win);
-		draw(move_left_enemy(data), data->x, data->y, data);
-		rotate_donut(data, paths->donut1);
+		draw(move_left_enemy(data), data, paths);
+		//rotate_donut(data, paths->donut1);
 	}
 	else if ((rand >= -63) && (rand <= 0))
 	{	
 		mlx_clear_window(data->mlx, data->win);
-		draw(move_right_enemy(data), data->x, data->y, data);
-		rotate_donut(data, paths->donut2);
+		draw(move_right_enemy(data), data, paths);
+		//rotate_donut(data, paths->donut2);
 	}
 	else if ((rand >= 1) && (rand <= 64))
 	{
 		mlx_clear_window(data->mlx, data->win);
-		draw(move_up_enemy(data), data->x, data->y, data);
-		rotate_donut(data, paths->donut1);
+		draw(move_up_enemy(data), data, paths);
+		//rotate_donut(data, paths->donut1);
 	}
 	else if ((rand >= 65) && (rand <= 127))
 	{
 		mlx_clear_window(data->mlx, data->win);
-		draw(move_down_enemy(data), data->x, data->y, data);
-		rotate_donut(data, paths->donut2);
+		draw(move_down_enemy(data), data, paths);
 	}
 }
 
@@ -81,6 +81,7 @@ int	animation(t_data *data)
 	paths->donut2 = "/Users/mbaioumy/Documents/so_long/Assets/donut2.xpm";
 	if (c > 2000)
 	{
+		enemy_moves(data, paths);
 		if (id == 1)
 		{
 			rotate_donut(data, paths->donut1);
@@ -91,11 +92,9 @@ int	animation(t_data *data)
 			rotate_donut(data, paths->donut2);
 			id = 1;
 		}
-		enemy_moves(data, paths);
 		c = 0;
 	}
 	else
 		c++;
-	//if (c > 2000)
 	return (0);
 }

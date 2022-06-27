@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 06:04:24 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/26 19:03:20 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/28 00:04:23 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,12 +186,11 @@ int main(int argc, char **argv)
 	char	*arr;
 	char	*buff;
 	char	**map;
-	int		x;
-	int		y;
+	t_str	*paths;
 	t_data	*data;
 
-	y = 0;
 	data = malloc(sizeof(t_data));
+	paths = malloc(sizeof(t_str));
 	buff = ft_strdup("");
 	arr = ft_strdup("");
 	check_ber(argv[1]);
@@ -203,19 +202,14 @@ int main(int argc, char **argv)
 		buff = get_next_line(file);
 	}
 	data->map = ft_split(arr, '\n');
-	x = get_x(data->map);
-	y = get_y(data->map);
-	// printf("x: %d\ny: %d\n", x, y);
-	// printf("border sides: %d\n", check_borders_sides(data->map, x));
-	// printf("borders top: %d\n", check_borders_top(data->map, y));
-	// printf("collectibles: %d\n", check_collectibles(data->map));
-	// printf("exit: %d\n", check_exit(data->map));
-	// printf("player: %d\n", check_player(data->map));
+	data->x = get_x(data->map);
+	data->y = get_y(data->map);
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, x * 70, y * 70, "test");
-	if (check_borders_sides(data->map, x) && check_borders_top(data->map, y)
+	data->win = mlx_new_window(data->mlx, data->x * 70, data->y * 70, "test");
+	paths->player = "/Users/mbaioumy/Documents/so_long/Assets/homer.xpm";
+	if (check_borders_sides(data->map, data->x) && check_borders_top(data->map, data->y)
 		&& check_collectibles(data->map) && check_exit(data->map) && check_player(data->map))
-		draw(data->map, x, y, data);
+		draw(data->map, data, paths);
 	else
 	{
 		printf("invalid map\n");

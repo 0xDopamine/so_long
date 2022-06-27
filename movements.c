@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 20:55:47 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/27 01:24:11 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/28 00:15:59 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char    **move_up(t_data *data)
 	coordinates = get_coordinates(data);
 	i = coordinates[0];
 	j = coordinates[1];
-	if (data->map[i - 1][j] != '1' && data->map[i - 1][j] != 'E')
+	if (data->map[i - 1][j] != '1' && data->map[i - 1][j] != 'E' && data->map[i - 1][j] != 'B')
 	{
 		data->map[i][j] = '0';
 		data->map[i - 1][j] = 'P';

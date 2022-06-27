@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:43:32 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/27 01:08:22 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/28 00:13:56 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ typedef struct s_str
 {
 	char	*donut1;
 	char	*donut2;
+	char	*player;
+	char	*enemy;
+	char	*collectible;
+	char	*exit;
+	char	*border;
 }	t_str;
 
 char			*ft_strdup(char *src);
@@ -61,7 +66,7 @@ int				ft_strncmp(char *s1, char *s2, unsigned int n);
 char			*ft_substr(char *s, unsigned int start, size_t len);
 char			*ft_strjoin(char *s1, char *s2);
 char			**ft_split(char const *s, char c);
-void			draw(char **map, int x, int y, t_data *data);
+void			draw(char **map, t_data *data, t_str *paths);
 int				key_hook(int key, void *ptr);
 char			**move_up(t_data *data);
 char			**move_down(t_data *data);
@@ -74,4 +79,5 @@ char			**move_up_enemy(t_data *data);
 char			**move_down_enemy(t_data *data);
 char			**move_right_enemy(t_data *data);
 char			**move_left_enemy(t_data *data);
+int				*get_coordinates_enemy(t_data *data);
 #endif
