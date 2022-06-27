@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:42:53 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/26 21:29:57 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:16:43 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	rotate_donut(t_data *data, char *path)
 	}
 }
 
-void	enemy_moves(t_data *data)
+void	enemy_moves(t_data *data, t_str *paths)
 {
 	int		file;
 	char	rand;
@@ -48,21 +48,25 @@ void	enemy_moves(t_data *data)
 	{
 		mlx_clear_window(data->mlx, data->win);
 		draw(move_left_enemy(data), data->x, data->y, data);
+		rotate_donut(data, paths->donut1);
 	}
 	else if ((rand >= -63) && (rand <= 0))
 	{	
 		mlx_clear_window(data->mlx, data->win);
 		draw(move_right_enemy(data), data->x, data->y, data);
+		rotate_donut(data, paths->donut2);
 	}
 	else if ((rand >= 1) && (rand <= 64))
 	{
 		mlx_clear_window(data->mlx, data->win);
 		draw(move_up_enemy(data), data->x, data->y, data);
+		rotate_donut(data, paths->donut1);
 	}
 	else if ((rand >= 65) && (rand <= 127))
 	{
 		mlx_clear_window(data->mlx, data->win);
 		draw(move_down_enemy(data), data->x, data->y, data);
+		rotate_donut(data, paths->donut2);
 	}
 }
 
@@ -70,23 +74,28 @@ int	animation(t_data *data)
 {
 	static int	c;
 	static int	id;
+	t_str		*paths;
 
+	paths = malloc(sizeof(t_str));
+	paths->donut1 = "/Users/mbaioumy/Documents/so_long/Assets/donut.xpm";
+	paths->donut2 = "/Users/mbaioumy/Documents/so_long/Assets/donut2.xpm";
 	if (c > 2000)
 	{
 		if (id == 1)
 		{
-			rotate_donut(data, "/Users/mbaioumy/Documents/so_long/Assets/donut.xpm");
+			rotate_donut(data, paths->donut1);
 			id = 0;
 		}
 		else if (id == 0)
 		{
-			rotate_donut(data, "/Users/mbaioumy/Documents/so_long/Assets/donut2.xpm");
+			rotate_donut(data, paths->donut2);
 			id = 1;
 		}
-		//enemy_moves(data);
+		enemy_moves(data, paths);
 		c = 0;
 	}
 	else
 		c++;
+	//if (c > 2000)
 	return (0);
 }

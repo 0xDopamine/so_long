@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:43:32 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/26 21:16:55 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/27 01:08:22 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ typedef struct s_data
 	int		x;
 	int		y;
 }		t_data;
+
+typedef struct s_str
+{
+	char	*donut1;
+	char	*donut2;
+}	t_str;
 
 char			*ft_strdup(char *src);
 int				checknl(char *str);
