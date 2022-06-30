@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:42:53 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/27 21:59:14 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/30 20:35:17 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,51 @@ void	enemy_moves(t_data *data, t_str *paths)
 {
 	int		file;
 	char	rand;
-	
-	file = open("/dev/random", O_RDONLY);
+	int		c;
+	int		i;
+	int		j;
+
+	i = 0;
 	paths->enemy = "Assets/MrBurns.xpm";
-	read(file, &rand, 1);
-	if ((rand >= -128) && (rand <= -64))
+	while (data->map[i])
 	{
-		mlx_clear_window(data->mlx, data->win);
-		draw(move_left_enemy(data), data, paths);
-		//rotate_donut(data, paths->donut1);
-	}
-	else if ((rand >= -63) && (rand <= 0))
-	{	
-		mlx_clear_window(data->mlx, data->win);
-		draw(move_right_enemy(data), data, paths);
-		//rotate_donut(data, paths->donut2);
-	}
-	else if ((rand >= 1) && (rand <= 64))
-	{
-		mlx_clear_window(data->mlx, data->win);
-		draw(move_up_enemy(data), data, paths);
-		//rotate_donut(data, paths->donut1);
-	}
-	else if ((rand >= 65) && (rand <= 127))
-	{
-		mlx_clear_window(data->mlx, data->win);
-		draw(move_down_enemy(data), data, paths);
+		file = open("/dev/random", O_RDONLY);
+		j = 0;
+		while (data->map[i][j])
+		{
+			if (data->map[i][j] == 'B')
+			{
+				if (c > 200)
+				{
+					read(file, &rand, 1);
+					if ((rand >= -128) && (rand <= -64))
+					{
+						mlx_clear_window(data->mlx, data->win);
+						draw(move_left_enemy(data), data, paths);
+					}
+					else if ((rand >= -63) && (rand <= 0))
+					{
+						mlx_clear_window(data->mlx, data->win);
+						draw(move_right_enemy(data), data, paths);
+					}
+					else if ((rand >= 1) && (rand <= 64))
+					{
+						mlx_clear_window(data->mlx, data->win);
+						draw(move_up_enemy(data), data, paths);
+					}
+					else if ((rand >= 65) && (rand <= 127))
+					{
+						mlx_clear_window(data->mlx, data->win);
+						draw(move_down_enemy(data), data, paths);
+					}
+					c = 0;
+				}
+				else
+					c++;
+			}
+			j++;
+		}
+		i++;
 	}
 }
 

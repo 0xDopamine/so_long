@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 06:04:24 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/28 00:04:23 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:32:55 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void	check_ber(char *argv)
 	i = 0;
 	while (argv[i] != '.')
 		i++;
-	//printf("%d", ft_strncmp(".ber", argv + i, ft_strlen(argv + i)));
+	printf("%c\n", argv[i]);
 	if (ft_strncmp(".ber", argv + i, ft_strlen(argv + i)) == 0)
 		return ;
 	else
@@ -191,6 +191,8 @@ int main(int argc, char **argv)
 
 	data = malloc(sizeof(t_data));
 	paths = malloc(sizeof(t_str));
+	data->counter = 0;
+	data->collected = 0;
 	buff = ft_strdup("");
 	arr = ft_strdup("");
 	check_ber(argv[1]);
@@ -204,9 +206,9 @@ int main(int argc, char **argv)
 	data->map = ft_split(arr, '\n');
 	data->x = get_x(data->map);
 	data->y = get_y(data->map);
+	data->collectibles_c = collectibles_counter(data);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, data->x * 70, data->y * 70, "test");
-	paths->player = "/Users/mbaioumy/Documents/so_long/Assets/homer.xpm";
 	if (check_borders_sides(data->map, data->x) && check_borders_top(data->map, data->y)
 		&& check_collectibles(data->map) && check_exit(data->map) && check_player(data->map))
 		draw(data->map, data, paths);

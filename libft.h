@@ -6,7 +6,7 @@
 /*   By: mbaioumy <mbaioumy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 15:43:32 by mbaioumy          #+#    #+#             */
-/*   Updated: 2022/06/28 00:13:56 by mbaioumy         ###   ########.fr       */
+/*   Updated: 2022/06/30 22:24:33 by mbaioumy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct s_data
 	int		endian;
 	int		x;
 	int		y;
+	int		counter;
+	int		collectibles_c;
+	int		collected;
 }		t_data;
 
 typedef struct s_str
@@ -80,4 +83,6 @@ char			**move_down_enemy(t_data *data);
 char			**move_right_enemy(t_data *data);
 char			**move_left_enemy(t_data *data);
 int				*get_coordinates_enemy(t_data *data);
+int				collectibles_counter(t_data *data);
+int				game_over(t_data *data);
 #endif
